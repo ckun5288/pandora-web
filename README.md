@@ -386,6 +386,17 @@
 
 ## 更新日志
 
+### 0401：
+- 新增模型支持：OAI API(如https://api.oaipro.com 5)、DALL·E
+- 修复当请求出错后重新请求，错误地触发了新建对话(表现为出现重复标题的对话但无法打开)的问题
+
+### 0328：
+- 修复当启用OAI服务时若请求register-websocket报错429，由于直接返回了响应(OAI的报错页)导致泄露(代理)IP的严重安全问题，请公网搭建的佬友务必更新，同时在此致歉 :cry:
+- 修复多轮对话可能出现报错`sqlite3.OperationalError: no such table: conversations_file`并导致异常的BUG
+
+### 0325：
+- 修复0324的更新中在无缓存情况下重新查看对话只能显示最后两条的BUG
+
 ### 0324：
 
 - 修复对话列表无法加载58条之后的记录
@@ -393,6 +404,8 @@
   - 需要使用本地网络环境(可设置代理)，将参数`proxy_api`/环境变量`OPENAI_API_PREFIX`配置为`https://chat.openai.com`，把`Access Token`填入/更新到用户配置目录(即`api.json`所在目录)下的`access_token.dat`文件。
   - **强烈建议**传入请求头参数"Oai-Device-Id"
   - 请务必注意**环境风控**，**仅**建议使用**无价值账号**
+  - 如果一直报错，换号试试，虚拟邮箱注册的账号风控级别较高，有可能官网正常但这里经常抽风甚至无法使用
+  - 论坛二级用户可以通过始皇的服务获取`Access Token` :partying_face:：整理自己的代码发现一个古早物件
 - 支持文件上传(以Base64编码/Url携带(需公网)、支持类型/大小限制)
 - 支持[kimi-free-api](https://github.com/LLM-Red-Team/kimi-free-api)、[glm-free-api](https://github.com/LLM-Red-Team/glm-free-api)、[emohaa-free-api](https://github.com/LLM-Red-Team/emohaa-free-api)项目
 - 前端直接显示接口报错内容
